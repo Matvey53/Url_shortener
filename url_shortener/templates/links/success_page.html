@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Ссылка создана{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-7 col-lg-6">
+    <div class="card shadow-sm">
+      <div class="card-body p-4">
+        <h1 class="h3 mb-3">Ссылка создана</h1>
+
+        <p class="text-muted mb-2">Оригинальная ссылка:</p>
+        <p class="border rounded p-2 bg-light text-break">
+          {{ url.original_url }}
+        </p>
+
+        <p class="text-muted mb-2">Короткая ссылка:</p>
+        <p class="border rounded p-2 bg-light">
+          <a href="{% url 'links:redirect' url.short_code %}">
+            {{ request.scheme }}://{{ request.get_host }}{% url 'links:redirect' url.short_code %}
+          </a>
+        </p>
+
+        <div class="d-flex gap-2 mt-4">
+          <a href="{% url 'links:stats_page' url.short_code %}" class="btn btn-outline-secondary">
+            Статистика
+          </a>
+          <a href="{% url 'links:main_page' %}" class="btn btn-primary">
+            Создать ещё
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
